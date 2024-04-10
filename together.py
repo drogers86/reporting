@@ -7,7 +7,7 @@ program in the future.
 from funcs import *
 
 # 'course_id' variable will eventually be user-defined. It is only static now for testing purposes.
-course_id = "3848322"
+course_id = "7437580"
 master_report = "masterrr.xlsx"
 # report = "creport.csv"  # Replace with "select_file()"
 
@@ -63,12 +63,12 @@ for col in ws.columns:
     setlen = 0
     column = col[0].column_letter
     # This line is for testing only and can be deleted later.
-    print(f"You are in Column:{column}")
+    # print(f"You are in Column:{column}")
     for cell in col:
         if len(str(cell.value)) > setlen:
             setlen = len(str(cell.value))
             # This line is for testing only and can be deleted later.
-            print(f"The value of {cell} is {cell.value}, and the setlen is \'{setlen}\'")
+            # print(f"The value of {cell} is {cell.value}, and the setlen is \'{setlen}\'")
             ws.column_dimensions[column].width = setlen + 2
 
 # Bold and center the first row

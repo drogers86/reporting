@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 chrome_options.add_experimental_option("detach", True)
 
 
@@ -19,7 +19,7 @@ def login(course_id):
     # Login
     driver.get(
         f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={course_id}")
-    time.sleep(.25)
+    time.sleep(1)
     driver.find_element("xpath", "//*[@id='main']/div/main/input[6]").send_keys(user)
     driver.find_element("xpath", "//*[@id='main']/div/main/input[7]").send_keys(passw)
     button_1 = driver.find_element("name", "button")
@@ -67,6 +67,7 @@ def convert(report, ws):
             except IndexError:
                 continue
         f.close()
+        os.remove(report)
 
 
 """
@@ -147,7 +148,8 @@ def tab_save(course_id):
         "4775856": "NYS Scenarios",
         "4673600": "NYC Intro",
         "4673603": "NYC Scenarios",
-        "7437580": "Menu Update",
+        "7437580": "Menu Update - FOH",
+        "7437443": "Menu Update - BOH",
         "1": "Sheet1",
         "2": "Sheet2",
         "3": "poo",
