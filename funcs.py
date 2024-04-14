@@ -7,10 +7,12 @@ from selenium.webdriver.chrome.options import Options
 chrome_options = Options()
 # Option to not open browser in the first place (DL reports in the background)
 # chrome_options.add_argument("--headless")
-# Option to keep browser window open after Selenium is finished (keep for testing)
+# Option to keep browser window open after Selenium is finished (Closes browser after using Selenium, by default. Keep for testing)
 chrome_options.add_experimental_option("detach", True)
 
-def login(course_id): # THIS FUNCTION WORKS THE WAY I WANT IT TO.
+# Function to navigate and login to website, navigate to page(s), and click elements to download file(s).
+# Also uses select_file() to generate a dictionary with key:value pairs of course_id:file to work with, later.
+def login(course_id):
     driver = webdriver.Chrome(options = chrome_options)
     course_id = course_id
     user = "102026939"
@@ -26,13 +28,15 @@ def login(course_id): # THIS FUNCTION WORKS THE WAY I WANT IT TO.
 
     reports = {}
     for cid in course_id:
-        url = f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}"
+        # url = f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}"
         # Download report
-        driver.get(url)
+        # TESTING
+        driver.get(f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}")
         button_2 = driver.find_element("xpath", "/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/img")
         button_2.click()
         button_3 = driver.find_element("xpath","/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/p[1]/a/span/span")
         button_3.click()
+        # This is necessary because in the xpath; the value of the first div tag changed between div[7] to div[11], one day
         try:
             button_4 = driver.find_element("xpath", "/html/body/div[11]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
             button_4.click()
@@ -46,7 +50,7 @@ def login(course_id): # THIS FUNCTION WORKS THE WAY I WANT IT TO.
     return reports
 
 
-# Select most recently downloaded file - NO LONGER NEEDED IN MAIN BODY.
+# Select most recently downloaded file
 def select_file():
     directory_path = "C:/Users/danny/Downloads/"
     most_recent_file = None
@@ -62,14 +66,14 @@ def select_file():
     return file
 
 
-# This function simply converts the .csv file to an .xlsx file
+# This function simply converts the .csv file to an .xlsx file, and writes only the desired rows
 def convert(report, ws):
     with open(report) as f:
         reader = csv.reader(f)
         for row in reader:
             try:
                 if row[6] == "0" or row[6] == "% Completed":
-                    # Change from append to overwrite
+                    # Change from making it append to making it overwrite - NOT DONE
                     ws.append(row)
             except UnicodeDecodeError:
                 pass
@@ -86,18 +90,13 @@ def fix(ws):
     ws.delete_cols(idx=5, amount=5)
 
     # Auto-width columns
-    # REMEMBER TO REMOVE THE CODE THAT PRINTS TEXT IN THE CONSOLE. IT IS FOR TESTING PURPOSES ONLY.
     for col in ws.columns:
         setlen = 0
         column = col[0].column_letter
-        # This line is for testing only and can be deleted later.
-        # print(f"You are in Column:{column}")
         for cell in col:
-            if len(str(cell.cid)) > setlen:
-                setlen = len(str(cell.cid))
-                # This line is for testing only and can be deleted later.
-                # print(f"The value of {cell} is {cell.value}, and the setlen is \'{setlen}\'")
-                ws.column_dimensions[column].width = setlen + 2
+            if len(str(cell)) > setlen:
+                setlen = len(str(cell))
+                ws.column_dimensions[column].width = setlen
 
     # Bold and center the first row
     for cell in ws["1:1"]:
@@ -124,3 +123,6 @@ courses = {
     "7437580": "Menu Update - FOH",
     "7437443": "Menu Update - BOH",
 }
+
+cids = list(courses.keys())
+titles = list(courses.values())

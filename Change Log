@@ -4,12 +4,8 @@ Changelog, Dev Notes, Etc...
 
 This iteration saw a few improvements and additions:
 
- - Added ability to navigate to multiple webpages
- - Modified login() to build and return a dictionary with key:value pairs as course id and course title instead of list
-    - This made it work more efficiently within the main body
- - Deleted a ton of test code and commentary throughout
- - Rearranged and cleaned things up a bit
+ - Debugged and got the program running smoothly.
 
 There are still things that I'm working on, and things I want to add:
- - immediate goal is to debug and get it working again
- - Next goal: web interface!
+ - A way to overwrite existing sheet, rather than appending to it (editing a sheet within a workbook).
+ - Start working on web interface.
