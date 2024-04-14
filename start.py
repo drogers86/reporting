@@ -114,8 +114,8 @@ for col in sheet.columns:
     setlen = 0
     column = col[0].column_letter
     for cell in col:
-        if len(str(cell.value)) > setlen:
-            setlen = len(str(cell.value))
+        if len(str(cell.cid)) > setlen:
+            setlen = len(str(cell.cid))
     set_col_width = setlen + 5
 #
 # sheet.column_dimensions[column].width = set_col_width
