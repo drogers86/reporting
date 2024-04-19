@@ -4,6 +4,8 @@ body {
   margin-top: 5rem;
 }
 
+
+
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
@@ -54,7 +56,7 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+  border-bottom: 10px solid #e3e3e3
 }
 
 .article-metadata a:hover {
@@ -93,12 +95,14 @@ a.article-title:hover {
   background-color: #627BBF;
   height: 150px;
   width: 150px;
+  cursor: pointer;
   border-radius: 20px;
   padding: 5px;
   margin: 10px;
   v-align: center;
   border-style: solid;
   border-color: black;
+  box-shadow: 0 9px #999;
 }
 
 .center {
@@ -107,7 +111,35 @@ a.article-title:hover {
   text-align: center;
  }
 
- .border {
+.border {
   border-style: solid;
   border-color: black;
 }
+
+.box:hover {background-color: #bfa662}
+
+.box:active {
+  background-color: #bfa662;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button {
+color: #ffffff;
+  background-color: #627BBF;
+  height: 50px;
+  width: 100px;
+  cursor: pointer;
+  border-radius: 20px;
+  v-align: center;
+  border-style: solid;
+  border-color: black;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #bfa662}
+
+.button:active {
+  background-color: #bfa662;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);

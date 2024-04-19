@@ -8,7 +8,7 @@ from funcs import *
 
 # 'course_id' variable will eventually be user-defined. It is only static now for testing purposes.
 # We will use the web interface to set the variable
-course_id = ["7437580", "4673600", "4673603", "3847029"]
+course_id = ["7437580", "7437443"]
 # Master report name will remain fixed.
 master_report = "master.xlsx"
 
