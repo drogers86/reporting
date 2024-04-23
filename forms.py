@@ -3,6 +3,7 @@ a class to tidy things up. This file is a dedicated space for me to experiment w
 in doing that, I will refactor my main program to include the class."""
 
 
+# Began - 4/23/24
 class Courses:
     def __init__(self, course_id, title, file):
         self.cid = course_id

@@ -1,4 +1,6 @@
-# Import stuff that we need
+# This version is defunct as of 4/23/24.
+# I'm only keeping it for nostalgia. Please ignore!
+
 import time
 import os
 import openpyxl

@@ -4,6 +4,8 @@ corporate-friendly .xlsx file for manager use. It is the intention of the develo
 program in the future.
 """
 
+# Current as of 4/23/24
+
 from funcs import *
 
 # 'course_id' variable will eventually be user-defined. It is only static now for testing purposes.

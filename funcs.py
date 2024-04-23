@@ -1,3 +1,5 @@
+# This document is current as of 4/23/24
+
 import time, os, csv, openpyxl
 import selenium.common.exceptions
 from openpyxl.styles import Font, Alignment
@@ -5,24 +7,25 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
-# Option to not open browser in the first place (DL reports in the background)
-# chrome_options.add_argument("--headless")
-# Option to keep browser window open after Selenium is finished (Closes browser after using Selenium, by default. Keep for testing)
+# Option to not open browser in the first place (DL reports in the background) chrome_options.add_argument(
+# "--headless") Option to keep browser window open after Selenium is finished (Closes browser after using Selenium,
+# by default. Keep for testing)
 chrome_options.add_experimental_option("detach", True)
+
 
 # Function to navigate and login to website, navigate to page(s), and click elements to download file(s).
 # Also uses select_file() to generate a dictionary with key:value pairs of course_id:file to work with, later.
 def login(course_id):
-    driver = webdriver.Chrome(options = chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     course_id = course_id
     user = "102026939"
-    passw = "RedLobster1"
+    pwd = "RedLobster1"
     driver.implicitly_wait(10)
 
     # Login
     driver.get("https://app.schoox.com/login.php")
     driver.find_element("xpath", "//*[@id='main']/div/main/input[6]").send_keys(user)
-    driver.find_element("xpath", "//*[@id='main']/div/main/input[7]").send_keys(passw)
+    driver.find_element("xpath", "//*[@id='main']/div/main/input[7]").send_keys(pwd)
     button_1 = driver.find_element("name", "button")
     button_1.click()
 
@@ -34,14 +37,18 @@ def login(course_id):
         driver.get(f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}")
         button_2 = driver.find_element("xpath", "/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/img")
         button_2.click()
-        button_3 = driver.find_element("xpath","/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/p[1]/a/span/span")
+        button_3 = driver.find_element("xpath",
+                                       "/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/p[1]/a/span/span")
         button_3.click()
-        # This is necessary because in the xpath; the value of the first div tag changed between div[7] to div[11], one day
+        # This is necessary because in the xpath; the value of the first div tag changed between div[7] to div[11],
+        # one day
         try:
-            button_4 = driver.find_element("xpath", "/html/body/div[11]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
+            button_4 = driver.find_element("xpath",
+                                           "/html/body/div[11]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
             button_4.click()
         except selenium.common.exceptions.NoSuchElementException:
-            button_4 = driver.find_element("xpath", "/html/body/div[7]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
+            button_4 = driver.find_element("xpath",
+                                           "/html/body/div[7]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
             button_4.click()
         # We don't want to capture the file name IMMEDIATELY because at first, it's a .tmp file
         time.sleep(1)
