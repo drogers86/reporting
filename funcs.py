@@ -1,4 +1,4 @@
-# This document is current as of 4/23/24
+# This document is current as of 4/30/24
 
 import time, os, csv, openpyxl
 import selenium.common.exceptions
@@ -6,6 +6,8 @@ from openpyxl.styles import Font, Alignment
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+course_name = []
+master_report = "master.xlsx"
 chrome_options = Options()
 # Option to not open browser in the first place (DL reports in the background) chrome_options.add_argument(
 # "--headless") Option to keep browser window open after Selenium is finished (Closes browser after using Selenium,
@@ -33,7 +35,6 @@ def login(course_id):
     for cid in course_id:
         # url = f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}"
         # Download report
-        # TESTING
         driver.get(f"https://app.schoox.com/academies/panel/dashboard2/training/course.php?acadId=7592&course_id={cid}")
         button_2 = driver.find_element("xpath", "/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/img")
         button_2.click()
@@ -71,6 +72,53 @@ def select_file():
                 most_recent_time = mod_time
     file = f"{directory_path}{most_recent_file}"
     return file
+
+
+def make_it_rain(course_id, master_report, reports):
+    for num in course_id:
+        course_name.append(courses[num])
+
+    # Check for existence of master file and proceed accordingly
+    if os.path.exists(master_report):
+        # If it exists: open it and check to see if a sheet exists for the selected course name.
+        master = openpyxl.load_workbook(master_report)
+        for cid in course_id:
+            title = courses[cid]
+            # If sheet exists: select sheet, transfer data from downloaded file, and format
+            if title in master.sheetnames:
+                master.active = master[title]
+                ws = master.active
+                report = reports[cid]
+                convert(report, ws)
+                fix(ws)
+            # If not: create the sheet, transfer data from downloaded file, and format
+            else:
+                master.create_sheet(title)
+                master.active = master[title]
+                ws = master.active
+                report = reports[cid]
+                # print(reports)
+                convert(report, ws)
+                fix(ws)
+    # If Master File does not exist: Create a new workbook and sheets, transfer data, and format
+    else:
+        master = openpyxl.Workbook()
+        for cid in course_id:
+            title = courses[cid]
+            master.create_sheet(title)
+            master.active = master[title]
+            ws = master.active
+            report = reports[cid]
+            convert(report, ws)
+            fix(ws)
+
+    # Save our work and close the file
+    save_path = f"C:/Users/danny/Project/{master_report}"
+    master.save(save_path)
+    master.close()
+
+    # Open and view the master file that we just finished working with.
+    os.system(f"start EXCEL.EXE {save_path}")
 
 
 # This function simply converts the .csv file to an .xlsx file, and writes only the desired rows
@@ -129,6 +177,9 @@ courses = {
     "4673603": "NYC Scenarios",
     "7437580": "Menu Update - FOH",
     "7437443": "Menu Update - BOH",
+    "653818" : "Food Safety Basics",
+    "428369" : "Basics of Credit Card Security",
+    "597103" : "Responsible Alcohol Service",
 }
 
 cids = list(courses.keys())

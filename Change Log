@@ -1,12 +1,18 @@
 Changelog, Dev Notes, Etc...
 
-4/19/24
+4/30/24
 
-This iteration saw a few improvements and additions:
+Updates:
 
- - Debugged and got the program running smoothly.
- - Program is mostly complete!
+ - Made tons of progress towards finishing the UI!
+     - On 'programs.html': each square is clickable and will either execute a script or navigate to another page fo further inout.
+     - Just got everything working together nicely.
+
+ - Turned the main body of 'main.py' into a function and added it, and all 'main.py' variables to 'funcs.py'
+
 
 There are still things that I'm working on, and things I want to add:
  - A way to overwrite existing sheet, rather than appending to it (editing a sheet within a workbook).
- - Start working on web interface.
+ - More tweaks:
+    - Add course name to the top of each sheet
+    - Add a loading animation to display while the login() function is running (javascript?)

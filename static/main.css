@@ -1,10 +1,14 @@
 body {
   background: #fafafa;
-  color: #333333;
+  color: #444444;
   margin-top: 5rem;
 }
 
+a {
+  text-decoration: none;
+  margin-left: 50px;
 
+}
 
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
@@ -87,8 +91,8 @@ a.article-title:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
+  gap: 110px;
+  justify-content: space-evenly;
   padding: 50px;
 }
 
@@ -102,7 +106,7 @@ a.article-title:hover {
   padding: 5px;
   margin: 10px;
   vertical-align: center;
-  border-style: solid;
+  /*border-style: solid;*/
   border-color: black;
   box-shadow: 0 9px #999;
 }
@@ -134,7 +138,7 @@ color: #ffffff;
   cursor: pointer;
   border-radius: 20px;
   vertical-align: center;
-  border-style: solid;
+  /*border-style: solid;*/
   border-color: black;
   box-shadow: 0 9px #999;
 }
@@ -145,71 +149,4 @@ color: #ffffff;
   background-color: #bfa662;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-}
-
-/* EVERYTHING BELOW THIS IS AN EXPERIMENT. PLEASE IGNORE.*/
-
-.container {
-  font-size: 1em;
-  color: #ffffff;
-  background-color: #627BBF;
-  /*width: 1em;*/
-  /*height: 3em;*/
-  height: 50px;
-  width: 100px;
-  line-height: 2;
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  /* Added Content  */
-  border-style: solid;
-  border-color: black;
-}
-
-.box {
-  color: #ffffff;
-  background-color: #627BBF;
-  height: 150px;
-  width: 150px;
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 5px;
-  margin: 10px;
-  vertical-align: center;
-  border-style: solid;
-  border-color: black;
-  box-shadow: 0 9px #999;
-}
-
-.link {
-  position: absolute;
-  z-index: 1;
-}
-
-.containerr {
-  font-size: 1em;
-  color: #ffffff;
-  background-color: #627BBF;
-  height: 50px;
-  width: 100px;
-  border-style: solid;
-  border-color: black;
-
-  line-height: 3;
-  text-align: center;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  /*position: relative;*/
-}
-
-.linkk {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
 }

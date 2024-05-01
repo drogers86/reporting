@@ -2,9 +2,12 @@
 reports for various training modules. Afterward, it will take the newly-downloaded .csv file, and format into a
 corporate-friendly .xlsx file for manager use. It is the intention of the developer to add further functionality to this
 program in the future.
+
+This specific file is designed to be run in the terminal, and is not the final version of the program. It is being kept
+for legacy purposes only.
 """
 
-# Current as of 4/23/24
+# Current as of 4/30/24
 
 from funcs import *
 

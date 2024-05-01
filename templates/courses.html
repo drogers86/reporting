@@ -1,0 +1,14 @@
+<!-- Current as of 4/30/24 -->
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+    <h1>{% block title %} You Have Downloaded The Following Course IDs: {% endblock %}</h1>
+    <hr>
+    <ul>
+{% for id in course_id %}
+        <li>{{id}}</li>
+{% endfor %}
+    </ul>
+{% endblock %}

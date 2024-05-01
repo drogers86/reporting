@@ -1,0 +1,38 @@
+<!-- Current as of 4/30/24 -->
+{% extends "layout.html" %}
+{% block content %}
+          <h1>Red Lobster's Super-Awesome Report Page</h1>
+          <br />
+            <div class="flex">
+              <a href="{{ url_for('food_safety') }}">
+                <div class="box">
+                    <p class="center">Food Safety Basics</p>
+                </div>
+              </a>
+              <a href="{{ url_for('sh_hourly') }}">
+                <div class="box">
+                    <p class="center">Sexual Harassment  Hourly</p>
+                </div>
+              </a>
+              <a href="{{ url_for('sh_mgr') }}">
+                <div class="box">
+                    <p class="center">Sexual Harassment  MGR</p>
+                </div>
+              </a>
+              <a href="{{ url_for('cc_safety') }}">
+                <div class="box">
+                    <p class="center">Credit Card Security</p>
+                </div>
+              </a>
+              <a href="{{ url_for('alcohol') }}">
+                <div class="box">
+                    <p class="center">Responsible Alcohol Service</p>
+                </div>
+              </a>
+              <a href="{{ url_for('menu_update') }}">
+                <div class="box">
+                    <p class="center">Menu Updates</p>
+                </div>
+              </a>
+            </div>
+{% endblock content %}
