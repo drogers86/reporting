@@ -108,7 +108,7 @@ a.article-title:hover {
   vertical-align: center;
   /*border-style: solid;*/
   border-color: black;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 9px #999999;
 }
 
 .center {
@@ -150,3 +150,11 @@ color: #ffffff;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loadingimage.gif) no-repeat;
+    cursor: wait;
+    }

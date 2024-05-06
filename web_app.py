@@ -1,7 +1,7 @@
 """
 This file is my Flask application. It is still in development.
 
-Current as of 4-30-24
+Current as of 5-6-24
 """
 
 from flask import Flask, render_template, url_for, request, redirect, flash
@@ -24,10 +24,11 @@ def programs():
 
 @app.route("/sh_hourly")
 def sh_hourly():
-    course_id = request.form.getlist('CID')
-    reports = login(course_id)
-    make_it_rain(course_id, master_report, reports)
-    return render_template("sh_hourly.html", course_id=course_id)
+    # form = CourseForm()
+    # course_id = request.form.getlist('CID')
+    # reports = login(course_id)
+    # make_it_rain(course_id, master_report, reports)
+    return render_template("sh_hourly.html")
 
 
 @app.route("/sh_mgr")

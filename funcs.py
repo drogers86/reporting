@@ -1,4 +1,4 @@
-# This document is current as of 4/30/24
+# This document is current as of 5/6/24
 
 import time, os, csv, openpyxl
 import selenium.common.exceptions
@@ -22,6 +22,9 @@ def login(course_id):
     course_id = course_id
     user = "102026939"
     pwd = "RedLobster1"
+    # I DON'T want to have to wait for 10 seconds. 2 seconds was enough at first, but the amount of time it took for
+    # the pages to load started to vary, so I had to keep increasing the implicit wait time to prevent the program
+    # from crashing when it tried to click on an xpath element that was not yet loaded. It sucks, because whenever
     driver.implicitly_wait(10)
 
     # Login
@@ -42,7 +45,7 @@ def login(course_id):
                                        "/html/body/div[5]/div/div[2]/div/div[2]/div[2]/div[2]/div/div/p[1]/a/span/span")
         button_3.click()
         # This is necessary because in the xpath; the value of the first div tag changed between div[7] to div[11],
-        # one day
+        # one day, so if one doesn't work, we'll try the other.
         try:
             button_4 = driver.find_element("xpath",
                                            "/html/body/div[11]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
@@ -51,14 +54,15 @@ def login(course_id):
             button_4 = driver.find_element("xpath",
                                            "/html/body/div[7]/div[1]/div[2]/div[2]/div[1]/generate-report/div/div/p/a")
             button_4.click()
-        # We don't want to capture the file name IMMEDIATELY because at first, it's a .tmp file
+        # We don't want to capture the file name IMMEDIATELY because at first, it's a .tmp file, so that won't work
         time.sleep(1)
         file = select_file()
         reports[cid] = file
     return reports
 
 
-# Select most recently downloaded file
+# Select most recently downloaded file and return it's filepath so that it can be saved to the 'reports' dictionary
+# in login()
 def select_file():
     directory_path = "C:/Users/danny/Downloads/"
     most_recent_file = None
@@ -78,7 +82,7 @@ def make_it_rain(course_id, master_report, reports):
     for num in course_id:
         course_name.append(courses[num])
 
-    # Check for existence of master file and proceed accordingly
+    # Check for existence of master file and proceed accordingly:
     if os.path.exists(master_report):
         # If it exists: open it and check to see if a sheet exists for the selected course name.
         master = openpyxl.load_workbook(master_report)
@@ -103,6 +107,7 @@ def make_it_rain(course_id, master_report, reports):
     # If Master File does not exist: Create a new workbook and sheets, transfer data, and format
     else:
         master = openpyxl.Workbook()
+
         for cid in course_id:
             title = courses[cid]
             master.create_sheet(title)
@@ -111,6 +116,9 @@ def make_it_rain(course_id, master_report, reports):
             report = reports[cid]
             convert(report, ws)
             fix(ws)
+
+        main_sheet = master['Sheet']
+        main_sheet.title = 'Main Page'
 
     # Save our work and close the file
     save_path = f"C:/Users/danny/Project/{master_report}"
@@ -177,9 +185,9 @@ courses = {
     "4673603": "NYC Scenarios",
     "7437580": "Menu Update - FOH",
     "7437443": "Menu Update - BOH",
-    "653818" : "Food Safety Basics",
-    "428369" : "Basics of Credit Card Security",
-    "597103" : "Responsible Alcohol Service",
+    "653818": "Food Safety Basics",
+    "428369": "Basics of Credit Card Security",
+    "597103": "Responsible Alcohol Service",
 }
 
 cids = list(courses.keys())
