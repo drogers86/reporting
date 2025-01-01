@@ -9,10 +9,11 @@ from selenium.webdriver.chrome.options import Options
 course_name = []
 master_report = "master.xlsx"
 chrome_options = Options()
-# Option to not open browser in the first place (DL reports in the background) chrome_options.add_argument(
-# "--headless") Option to keep browser window open after Selenium is finished (Closes browser after using Selenium,
-# by default. Keep for testing)
-chrome_options.add_experimental_option("detach", True)
+# Option to not open browser in the first place (DL reports in the background):
+chrome_options.add_argument("--headless")
+# Option to keep browser window open after Selenium is finished (Closes browser after using Selenium, by default.
+# Keep for testing):
+# chrome_options.add_experimental_option("detach", True)
 
 
 # Function to navigate and login to website, navigate to page(s), and click elements to download file(s).
@@ -24,7 +25,8 @@ def login(course_id):
     pwd = "RedLobster1"
     # I DON'T want to have to wait for 10 seconds. 2 seconds was enough at first, but the amount of time it took for
     # the pages to load started to vary, so I had to keep increasing the implicit wait time to prevent the program
-    # from crashing when it tried to click on an xpath element that was not yet loaded. It sucks, because whenever
+    # from crashing when it tried to click on an xpath element that was not yet loaded. It sucks, but it do be like
+    # that, sometimes.
     driver.implicitly_wait(10)
 
     # Login
@@ -177,7 +179,7 @@ courses = {
     "3848322": "Understanding Harassment 2",
     "3848379": "Understanding Harassment 3",
     "3847029": "Understanding Harassment 4",
-    "3846770": "Understanding Harassment: 05",
+    "3846770": "Understanding Harassment 5",
     "3848626": "Understanding Harassment 6",
     "3848445": "Understanding Harassment 7",
     "4775856": "NYS Scenarios",
